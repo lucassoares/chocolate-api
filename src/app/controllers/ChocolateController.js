@@ -10,7 +10,7 @@ class ChocolateController {
   // store -> salvar dados
   async store(req, res) {
     const chocolate = await chocolateModel.create(req.body);
-    return res.json(chocolate);
+    return res.status(201).json(chocolate);
   }
 
   // show -> listar apenas 1 chocolate
