@@ -1,9 +1,23 @@
 const bcrypt = require("bcryptjs");
-const userModel = require("../models/user");
+const yup = require("yup");
+const jwt = require("jsonwebtoken");
+const userModel = require("../models/user"); // imports node_modules imports internos
 
 class UserController {
   // store -> salvar usuario no banco de dados
   async store(req, res) {
+    const userValidation = yup.object().shape({
+      email: yup.string().email().required(),
+      senha: yup.string().required(),
+      nome: yup.string().required(),
+    });
+
+    const validateUser = await userValidation.isValid(req.body); // true ou false
+
+    if (!validateUser) {
+      return res.status(400).json({ error: "Dados não enviados corretamente" });
+    }
+
     const user = await userModel.create(req.body);
 
     user.senha = undefined; // removendo o valor senha do objeto user para responder a req
@@ -29,7 +43,16 @@ class UserController {
       return res.status(401).json({ error: "Credenciais invalidas" });
     }
 
-    return res.json({ msg: "Usuario autorizado" });
+    const token = jwt.sign(
+      { id: user._id },
+      "0cc25b606fe928a0c9a58f7f209c4495",
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    // enviar token para o usuario com status 200
+    return res.json({ token });
   }
 
   // show -> listar apenas 1 usuario

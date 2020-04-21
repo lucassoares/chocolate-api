@@ -1,3 +1,4 @@
+const yup = require("yup");
 const chocolateModel = require("../models/chocolate");
 
 class ChocolateController {
@@ -9,6 +10,17 @@ class ChocolateController {
 
   // store -> salvar dados
   async store(req, res) {
+    const chocolateValidation = yup.object().shape({
+      nome: yup.string().required(),
+      marca: yup.string().required(),
+      valor: yup.number().required(),
+    });
+
+    const validateChocolate = await chocolateValidation.isValid(req.body); // true ou false
+
+    if (!validateChocolate) {
+      return res.status(400).json({ error: "Dados não enviados corretamente" });
+    }
     const chocolate = await chocolateModel.create(req.body);
     return res.status(201).json(chocolate);
   }

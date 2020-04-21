@@ -1,12 +1,14 @@
 const routes = require("express").Router();
+const authMid = require("./app/middlewares/auth");
 const ChocolateController = require("./app/controllers/ChocolateController");
 const UserController = require("./app/controllers/UserController");
 
-// rota de autenticacao
-routes.post("/user/auth", UserController.auth); // localhost:3000/user/auth
+routes.post("/user", UserController.store);
+routes.post("/user/auth", UserController.auth);
+
+routes.use(authMid);
 
 // rotas dos usuarios
-routes.post("/user", UserController.store);
 routes.get("/user", UserController.index);
 routes.get("/user/:userId", UserController.show);
 routes.put("/user/:userId", UserController.update);
