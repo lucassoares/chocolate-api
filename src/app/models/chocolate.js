@@ -12,6 +12,9 @@ const ChocolateSchema = mongoose.Schema(
     valor: {
       type: Number,
     },
+    imagem: {
+      type: String,
+    },
   },
   {
     timestamps: true,

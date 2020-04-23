@@ -21,6 +21,11 @@ class ChocolateController {
     if (!validateChocolate) {
       return res.status(400).json({ error: "Dados não enviados corretamente" });
     }
+
+    const { key } = req.file;
+
+    req.body.imagem = `localhost:3000/images/${key}`;
+
     const chocolate = await chocolateModel.create(req.body);
     return res.status(201).json(chocolate);
   }

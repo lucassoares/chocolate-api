@@ -1,4 +1,6 @@
 const routes = require("express").Router();
+const multer = require("multer");
+const multerConfig = require("./config/multer");
 const authMid = require("./app/middlewares/auth");
 const ChocolateController = require("./app/controllers/ChocolateController");
 const UserController = require("./app/controllers/UserController");
@@ -6,7 +8,7 @@ const UserController = require("./app/controllers/UserController");
 routes.post("/user", UserController.store);
 routes.post("/user/auth", UserController.auth);
 
-routes.use(authMid);
+//routes.use(authMid); // validacao do JWT
 
 // rotas dos usuarios
 routes.get("/user", UserController.index);
@@ -16,7 +18,11 @@ routes.delete("/user/:userId", UserController.destroy);
 
 // rotas dos chocolates
 routes.get("/", ChocolateController.index);
-routes.post("/", ChocolateController.store);
+routes.post(
+  "/",
+  multer(multerConfig).single("file"),
+  ChocolateController.store
+); // salva chocolate
 routes.get("/:id", ChocolateController.show);
 routes.put("/:id", ChocolateController.update);
 routes.delete("/:id", ChocolateController.destroy);
