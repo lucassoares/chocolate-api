@@ -8,20 +8,10 @@ class ChocolateController {
     return res.json(chocolates);
   }
 
+  // req -> mid(jwt) -> mid (validacao) -> controller
+
   // store -> salvar dados
   async store(req, res) {
-    const chocolateValidation = yup.object().shape({
-      nome: yup.string().required(),
-      marca: yup.string().required(),
-      valor: yup.number().required(),
-    });
-
-    const validateChocolate = await chocolateValidation.isValid(req.body); // true ou false
-
-    if (!validateChocolate) {
-      return res.status(400).json({ error: "Dados não enviados corretamente" });
-    }
-
     const { key } = req.file;
 
     req.body.imagem = `localhost:3000/images/${key}`;

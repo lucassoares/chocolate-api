@@ -6,18 +6,6 @@ const userModel = require("../models/user"); // imports node_modules imports int
 class UserController {
   // store -> salvar usuario no banco de dados
   async store(req, res) {
-    const userValidation = yup.object().shape({
-      email: yup.string().email().required(),
-      senha: yup.string().required(),
-      nome: yup.string().required(),
-    });
-
-    const validateUser = await userValidation.isValid(req.body); // true ou false
-
-    if (!validateUser) {
-      return res.status(400).json({ error: "Dados não enviados corretamente" });
-    }
-
     const user = await userModel.create(req.body);
 
     user.senha = undefined; // removendo o valor senha do objeto user para responder a req
