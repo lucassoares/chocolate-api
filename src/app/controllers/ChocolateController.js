@@ -1,5 +1,4 @@
-const yup = require("yup");
-const chocolateModel = require("../models/chocolate");
+const chocolateModel = require('../models/chocolate');
 
 class ChocolateController {
   // index -> listagem completa
@@ -41,7 +40,7 @@ class ChocolateController {
   async destroy(req, res) {
     const { id } = req.params;
     await chocolateModel.findByIdAndDelete(id);
-    return res.json({ msg: "Chocolate foi deletado" });
+    return res.json({ msg: 'Chocolate foi deletado' });
   }
 }
 

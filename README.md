@@ -20,3 +20,12 @@ REQ -> MID <-
 
 - Envio pelo Header da request
 - Chave: Authorization - Bearer TOKEN
+
+### Style Guide
+
+Linters
+PHPLint
+PyLint
+ESLint
+
+Prettier

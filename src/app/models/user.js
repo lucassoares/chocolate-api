@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs");
-const mongoose = require("../../config/database");
+const bcrypt = require('bcryptjs');
+const mongoose = require('../../config/database');
 
 // modulos node_modules
 // modulos internos
@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema(
   }
 );
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   const hashPassword = await bcrypt.hash(this.senha, 10);
   this.senha = hashPassword;
   next();
@@ -36,5 +36,5 @@ UserSchema.pre("save", async function (next) {
 
 // CONTROLLER -> MODEL -> SAVE -> (HOOK) -> NEXT -> SALVAR NO BANCO DE DADOS
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 module.exports = User;

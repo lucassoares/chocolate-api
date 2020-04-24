@@ -1,4 +1,4 @@
-const mongoose = require("../../config/database");
+const mongoose = require('../../config/database');
 
 const ChocolateSchema = mongoose.Schema(
   {
@@ -21,5 +21,5 @@ const ChocolateSchema = mongoose.Schema(
   }
 );
 
-const Chocolate = mongoose.model("Chocolate", ChocolateSchema);
+const Chocolate = mongoose.model('Chocolate', ChocolateSchema);
 module.exports = Chocolate;

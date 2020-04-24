@@ -1,4 +1,4 @@
-const yup = require("yup");
+const yup = require('yup');
 
 class Validators {
   async chocolateValidator(req, res, next) {
@@ -11,7 +11,7 @@ class Validators {
     const validateChocolate = await chocolateValidation.isValid(req.body); // true ou false
 
     if (!validateChocolate) {
-      return res.status(400).json({ error: "Dados não enviados corretamente" });
+      return res.status(400).json({ error: 'Dados não enviados corretamente' });
     }
 
     return next();
@@ -27,7 +27,7 @@ class Validators {
     const validateUser = await userValidation.isValid(req.body); // true ou false
 
     if (!validateUser) {
-      return res.status(400).json({ error: "Dados não enviados corretamente" });
+      return res.status(400).json({ error: 'Dados não enviados corretamente' });
     }
 
     return next();

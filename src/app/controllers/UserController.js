@@ -1,7 +1,6 @@
-const bcrypt = require("bcryptjs");
-const yup = require("yup");
-const jwt = require("jsonwebtoken");
-const userModel = require("../models/user"); // imports node_modules imports internos
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/user'); // imports node_modules imports internos
 
 class UserController {
   // store -> salvar usuario no banco de dados
@@ -23,21 +22,19 @@ class UserController {
   async auth(req, res) {
     const { email, senha } = req.body;
 
-    //busca pelo usuario
+    // busca pelo usuario
     const user = await userModel.findOne({ email }); // email: email
 
     // verificando se a senha esta valida
     if (!(await bcrypt.compare(senha, user.senha))) {
-      return res.status(401).json({ error: "Credenciais invalidas" });
+      return res.status(401).json({ error: 'Credenciais invalidas' });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      "0cc25b606fe928a0c9a58f7f209c4495",
-      {
-        expiresIn: "1d",
-      }
-    );
+    const { _id: id } = user;
+
+    const token = jwt.sign({ id }, '0cc25b606fe928a0c9a58f7f209c4495', {
+      expiresIn: '1d',
+    });
 
     // enviar token para o usuario com status 200
     return res.json({ token });
@@ -64,7 +61,7 @@ class UserController {
   async destroy(req, res) {
     const { userId } = req.params;
     await userModel.findByIdAndDelete(userId);
-    return res.json({ msg: "Usuario foi deletado" });
+    return res.json({ msg: 'Usuario foi deletado' });
   }
 }
 
