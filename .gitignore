@@ -3,3 +3,5 @@ chocolates/
 
 tmp/uploads/*
 !tmp/uploads/.gitkeep
+
+.env

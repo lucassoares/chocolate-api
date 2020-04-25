@@ -32,7 +32,7 @@ class UserController {
 
     const { _id: id } = user;
 
-    const token = jwt.sign({ id }, '0cc25b606fe928a0c9a58f7f209c4495', {
+    const token = jwt.sign({ id }, process.env.JWT_KEY, {
       expiresIn: '1d',
     });
 
