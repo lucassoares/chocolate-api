@@ -1,4 +1,4 @@
-const chocolateModel = require("../models/chocolate");
+const chocolateModel = require('../models/chocolate');
 
 class ChocolateController {
   // index -> listagem completa
@@ -9,8 +9,12 @@ class ChocolateController {
 
   // store -> salvar dados
   async store(req, res) {
+    const { key } = req.file;
+
+    req.body.imagem = `localhost:3000/images/${key}`;
+
     const chocolate = await chocolateModel.create(req.body);
-    return res.json(chocolate);
+    return res.status(201).json(chocolate);
   }
 
   // show -> listar apenas 1 chocolate
@@ -34,7 +38,7 @@ class ChocolateController {
   async destroy(req, res) {
     const { id } = req.params;
     await chocolateModel.findByIdAndDelete(id);
-    return res.json({ msg: "Chocolate foi deletado" });
+    return res.json({ msg: 'Chocolate foi deletado' });
   }
 }
 

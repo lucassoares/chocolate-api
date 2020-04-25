@@ -1,7 +1,5 @@
 ## Chocolate API
 
-Iniciar
-
 ```
 npm install
 ```
