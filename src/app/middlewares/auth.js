@@ -5,14 +5,12 @@ const logger = require('../../helper/logger');
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  // verificando se o token foi enviado
   if (!authHeader) {
     return res.status(401).json({ error: 'Token não enviado' });
   }
 
   const parts = authHeader.split(' ');
 
-  // verificando se o token está com formato válido
   if (!parts.length === 2) {
     return res.status(401).json({ error: 'Token com formato inválido' });
   }
@@ -28,7 +26,7 @@ module.exports = async (req, res, next) => {
       token,
       process.env.JWT_KEY
     );
-    logger.info(tokenDecoded.id); // id do usuario que estava no token
+    logger.info(tokenDecoded.id);
     return next();
   } catch (e) {
     logger.error(e);

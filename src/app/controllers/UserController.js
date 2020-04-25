@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/user'); // imports node_modules imports internos
+const userModel = require('../models/user');
 
 class UserController {
   // store -> salvar usuario no banco de dados
   async store(req, res) {
     const user = await userModel.create(req.body);
 
-    user.senha = undefined; // removendo o valor senha do objeto user para responder a req
+    user.senha = undefined;
 
     return res.status(201).json(user);
   }

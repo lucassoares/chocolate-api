@@ -8,7 +8,7 @@ class Validators {
       valor: yup.number().required(),
     });
 
-    const validateChocolate = await chocolateValidation.isValid(req.body); // true ou false
+    const validateChocolate = await chocolateValidation.isValid(req.body);
 
     if (!validateChocolate) {
       return res.status(400).json({ error: 'Dados não enviados corretamente' });
@@ -24,7 +24,7 @@ class Validators {
       nome: yup.string().required(),
     });
 
-    const validateUser = await userValidation.isValid(req.body); // true ou false
+    const validateUser = await userValidation.isValid(req.body);
 
     if (!validateUser) {
       return res.status(400).json({ error: 'Dados não enviados corretamente' });

@@ -7,8 +7,6 @@ class ChocolateController {
     return res.json(chocolates);
   }
 
-  // req -> mid(jwt) -> mid (validacao) -> controller
-
   // store -> salvar dados
   async store(req, res) {
     const { key } = req.file;

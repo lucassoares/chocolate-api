@@ -27,7 +27,7 @@ app.use(
 
 app.use(routes);
 
-app.use(async (error, req, res, next) => {
+app.use(async (error, req, res) => {
   if (error) {
     const errors = await new Youch(error, req).toJSON();
     logger.error(JSON.stringify(errors));
@@ -38,4 +38,4 @@ app.use(async (error, req, res, next) => {
   }
 });
 
-app.listen(3000, () => logger.info(`API DE CHOCOLATE SUBIU`));
+app.listen(3000, () => logger.info(`🚀️ API DE CHOCOLATE SUBIU`));
